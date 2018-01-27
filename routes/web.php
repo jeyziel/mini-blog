@@ -14,8 +14,12 @@ Route::get('/posts/create', 'PostController@create');
 //Route::get('/posts/{show}','PostController@show');
 Route::post('/posts', 'PostController@store');
 Route::get('/posts/{post}','PostController@show');
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-//comments
 Route::post('/posts/{post}/comments','CommentsController@addComment');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+//tags
+Route::get('/tag/create', 'TagController@create');
+Route::post('/tag/store', 'TagController@store');
+
+

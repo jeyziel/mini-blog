@@ -17,6 +17,15 @@
 			<textarea name="body" id="body" class="form-control"></textarea>
 		</div>
 
+		@foreach($tags as $tag)
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="{{$tag->id}}" id="{{$tag->name}}" name="tag_id[]">
+				<label class="form-check-label" for="{{ $tag->name  }}">
+					{{ $tag->name  }}
+				</label>
+			</div>
+		@endforeach
+
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
