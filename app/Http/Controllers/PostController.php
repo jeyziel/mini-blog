@@ -28,7 +28,7 @@ class PostController extends Controller
 //        $user = auth()->user();
 //        \Mail::to($user)->send( new Welcome($user) );
 
-        return view('posts.index', compact('posts', 'archives'));
+        return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
@@ -46,24 +46,32 @@ class PostController extends Controller
 
     public function store()
     {
+
         $this->validate(request(), [
             'title' => 'required',
             'body' => 'required',
-            'tag_id' => 'required'
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'tag_id' => 'required',
         ]);
 
 		try {
 
+            if($image = request()->hasFile('image')) {
+                $image_path = request()->file('image')->store('avatars','public');
+
+            }
+
             $post = Post::create([
                 'title' => request('title'),
                 'body' => request('body'),
+                'image_path' => $image_path,
                 'user_id' => auth()->id()
             ]);
 
             $post->tags()->attach( request('tag_id') );
 
         } catch (\Exception $e) {
-            redirect('/posts/create');
+            return redirect('/posts/create')->withErrors($e->getMessage());
         }
 
     	return redirect('/');

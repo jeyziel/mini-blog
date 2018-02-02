@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
          
             $view->with(compact('archives', 'tags'));
         });
+
+        view()->composer('posts.index', function($view){
+           $posts = \App\Post::latest()->paginate(1);
+           $view->with(compact('posts'));
+        });
     }
 
     /**

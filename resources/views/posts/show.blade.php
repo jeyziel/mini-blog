@@ -4,6 +4,9 @@
 
 <div class="col-sm-8 blog-main">
 	<h1>{{ $post->title }}</h1>
+	<div class="row">
+		<img src="{{ asset("storage/$post->image_path")  }}" width="700px" height="500p" alt="">
+	</div>
 	<p>{{ $post->body }}</p>
 
 	<div class="comments">

@@ -5,7 +5,7 @@
 	<h1>create post</h1>
 	<hr>
 	@include ('layouts.errors')
-	<form method="POST" action="/posts">
+	<form method="POST" action="/posts" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="title">title</label>
@@ -15,6 +15,11 @@
 		<div class="form-group">
 			<label for="body">body</label>
 			<textarea name="body" id="body" class="form-control"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="image">Imagem</label>
+			<input type="file" name="image" class="form-control">
 		</div>
 
 		@foreach($tags as $tag)
